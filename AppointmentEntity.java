@@ -1,8 +1,7 @@
 package com.marcusvynicius.appoinment_management;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -11,6 +10,9 @@ import java.util.UUID;
 
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity(name = "appointment")
 public class AppointmentEntity {
 
@@ -23,6 +25,7 @@ public class AppointmentEntity {
 
 
     @Column(nullable = false)
+    @Builder.Default
     private boolean active = true;
 
     private String professional;

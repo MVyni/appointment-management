@@ -1,7 +1,9 @@
 package com.marcusvynicius.appoinment_management.controllers;
 
 import com.marcusvynicius.appoinment_management.AppointmentEntity;
+import com.marcusvynicius.appoinment_management.dto.CreateAppointmentDTO;
 import com.marcusvynicius.appoinment_management.services.CreateAppointmentService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +20,16 @@ public class CreateAppointmentController {
     private CreateAppointmentService createAppointmentService;
 
     @PostMapping("/")
-    public ResponseEntity<Object> create(@Valid @RequestBody AppointmentEntity appointmentEntity) {
+    public ResponseEntity<Object> create(@Valid @RequestBody CreateAppointmentDTO createAppointmentDTO,
+                                         HttpServletRequest request) {
+
+         var appointmentId = request.getAttribute("appointment_id");
+
+         var appointmentEntity = AppointmentEntity.builder()
+                 .name(createAppointmentDTO.getName())
+                 .category(createAppointmentDTO.getCategory())
+                 .professional(createAppointmentDTO.getProfessional())
+                 .build();
 
         try {
 
@@ -26,7 +37,7 @@ public class CreateAppointmentController {
             return ResponseEntity.ok().body(result);
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
