@@ -20,20 +20,10 @@ public class CreateAppointmentController {
     private CreateAppointmentService createAppointmentService;
 
     @PostMapping("/")
-    public ResponseEntity<Object> create(@Valid @RequestBody CreateAppointmentDTO createAppointmentDTO,
-                                         HttpServletRequest request) {
-
-         var appointmentId = request.getAttribute("appointment_id");
-
-         var appointmentEntity = AppointmentEntity.builder()
-                 .name(createAppointmentDTO.getName())
-                 .category(createAppointmentDTO.getCategory())
-                 .professional(createAppointmentDTO.getProfessional())
-                 .build();
+    public ResponseEntity<Object> create(@Valid @RequestBody CreateAppointmentDTO createAppointmentDTO) {
 
         try {
-
-            var result = this.createAppointmentService.execute(appointmentEntity);
+            var result = this.createAppointmentService.execute(createAppointmentDTO);
             return ResponseEntity.ok().body(result);
 
         } catch (Exception e) {

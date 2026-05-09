@@ -7,5 +7,5 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface AppointmentRepository extends JpaRepository<AppointmentEntity, UUID> {
-
+    List<AppointmentEntity> findByNameAndCategory (String name, String category);
 }

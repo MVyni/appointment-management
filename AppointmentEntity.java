@@ -22,13 +22,13 @@ public class AppointmentEntity {
 
     private String name;
     private String category;
+    private String professional;
 
 
     @Column(nullable = false)
     @Builder.Default
     private boolean active = true;
 
-    private String professional;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
