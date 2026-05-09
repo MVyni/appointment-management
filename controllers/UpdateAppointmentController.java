@@ -21,7 +21,7 @@ public class UpdateAppointmentController {
     private UpdateAppointmentService updateAppointmentService;
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> execute(
+    public ResponseEntity<Object> update(
             @PathVariable("id") UUID id,
             @Valid @RequestBody UpdateAppointmentDTO updateAppointmentDTO) {
 
